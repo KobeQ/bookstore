@@ -10,7 +10,7 @@
       end  
 
       def to_s
-          "#{@isbn} - #{@title}by #{@authir}. Price #{@price}"
+          "#{@isbn} - #{@title}by #{@author}. Price #{@price}"
       end
 
    end

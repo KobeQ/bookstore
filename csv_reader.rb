@@ -19,14 +19,16 @@ class CsvReader
         @books_in_stock[isbn]
     end
 
-   def authorSearch(name)
-         matches = []
-         @books_in_stock.each do |isbn, book|
-           if book.author == name
-              matches << book
-           end
-         end
-         return matches
-     end
+    def authorSearch(name)
+        matches = @books_in_stock.select {|isbn,book| book.author == name}
+        return matches.values
+    end
 
+    def storeData
+        f = File.new("temp.csv",  "w")
+        @books_in_stock.each_value do |b| 
+            f.puts "#{b.isbn},#{b.title},#{b.price},#{b.author}"
+        end
+        File.rename("temp.csv",@data_file)
+    end
 end
